@@ -41,10 +41,10 @@
                         <h4>Bonjour!</h4>
                         <form class="pt-3" action="Admin/LoginAdmin" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="data01" placeholder="Username" required>
+                                <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="data01" placeholder="Username" required value="Jennifer">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="data02" placeholder="Password" required>
+                                <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="data02" placeholder="Password" required value="jenn123">
                             </div>
                             <div class="mt-3">
                                 <input type="submit" class="btn btn-success" value="LOG IN">
