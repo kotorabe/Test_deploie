@@ -14,6 +14,7 @@ public class Rechargement {
 	private float montantrecharge;
 	private LocalDateTime dateheurechargement;
 	private int validation;
+	private int idrechargement;
 	public int getIdutilisateur() {
 		return idutilisateur;
 	}
@@ -30,7 +31,7 @@ public class Rechargement {
 	{
 		this.montantrecharge = Float.parseFloat(montant);
 	}
-	
+
 	public LocalDateTime getDateheurechargement() {
 		return dateheurechargement;
 	}
@@ -43,7 +44,13 @@ public class Rechargement {
 	public void setValidation(int validation) {
 		this.validation = validation;
 	}
-	
+	public int getIdrechargement() {
+		return idrechargement;
+	}
+	public void setIdrechargement(int idrechargement) {
+		this.idrechargement = idrechargement;
+	}
+
 	public boolean create(Rechargement recharge) throws Exception
 	{
 		boolean retour = false;
@@ -77,7 +84,7 @@ public class Rechargement {
 	public Rechargement selectByIdRecharge(int idrechargement) throws Exception
 	{
 		String requete = "select * from rechargement where idrechargement='"+idrechargement+"'";
-		
+
 		Connection connex = null;
 		Statement state = null;
 		Rechargement retour = new Rechargement();
@@ -90,14 +97,14 @@ public class Rechargement {
 			{
 				retour.setIdutilisateur(rs.getInt("idutilisateur"));
 				retour.setMontantrecharge(rs.getFloat("montantrecharge"));
-				
+
 			}
 		}
 		catch(Exception e)
 		{
 			throw e;
 		}
-		finally
+		/*finally
 		{
 			if(state != null)
 			{
@@ -107,7 +114,7 @@ public class Rechargement {
 			{
 				connex.close();
 			}
-		}
+		}*/
 		return retour;
 	}
 	public boolean validation_insertion(int idrechargement) throws Exception
@@ -138,15 +145,15 @@ public class Rechargement {
 			}
 			throw e;
 		}
-		finally
+		/*finally
 		{
 			if(connex != null)
 			{
 				connex.close();
 			}
-		}
+		}*/
 		return retour;
-		
+
 	}
-	
+
 }

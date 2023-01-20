@@ -17,10 +17,10 @@ drop table utilisateur;
 -- 1
 Create table utilisateur(
     idUtilisateur serial primary key not null,
-    nom text not null,
-    prenom text not null,
-    email text not null,
-    mdp text not null,
+    nom varchar(20) not null,
+    prenom varchar(20) not null,
+    email varchar(20) not null,
+    mdp varchar(20) not null,
     solde_compte float default 0
 );
 INSERT INTO utilisateur (nom, prenom,email,mdp,solde_compte) values
@@ -74,9 +74,7 @@ Create table Enchere(
     idCategorie int not null references categorie(idCategorie),
     dateheureenchere timestamp default current_timestamp,
     prixdevente float not null,
-    prixminimum float not null,
-    etat int default 0,
-    datefinenchere timestamp default current_timestamp
+    prixminimum float not null
 );
 INSERT INTO Enchere (idEnchere,idUtilisateur,dureeEnchere,idCategorie,prixdevente,prixminimum) values
 (2,2,2.0,1,2000,1500),
@@ -115,15 +113,16 @@ INSERT INTO commission (idEnchere,commission) values
 
 
  create table token(
-    token text,expire date,idutilisateur int
+     id serial primary key,token text,expire date,idutilisateur int
 );
 
 create or replace view v_utilisateur_rechargement as select utilisateur.*,montantrecharge,dateheurechargement,validation from utilisateur,rechargement where utilisateur.idutilisateur = rechargement.idutilisateur;
+
+create or replace view v_utilisateur_rechargement2 as select utilisateur.*,montantrecharge,dateheurechargement,validation, idRechargement from utilisateur,rechargement where utilisateur.idutilisateur = rechargement.idutilisateur;
+
 
 create or replace view rechargement_non_valide as select * from v_utilisateur_rechargement where validation = 0;
 
 create or replace view v_enchere_surencherir as select enchere.idenchere,dureeenchere,description,dateheureenchere,montant from enchere,surencherir where enchere.idenchere = surencherir.idenchere;
 
 create or replace view enchere_solde as select idenchere,max(montant) as montant,dateheureenchere from v_enchere_surencherir group by idenchere,dateheureenchere;
-
-create or replace view v_utilisateur_token as select utilisateur.*,token,expire from token,utilisateur where utilisateur.idutilisateur = token.idutilisateur;

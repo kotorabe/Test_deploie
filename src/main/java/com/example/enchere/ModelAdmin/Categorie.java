@@ -38,27 +38,21 @@ public class Categorie {
 		boolean retour = false;
 		try
 		{
-			connex = new Connexion().setConnect();
+			connex = Connexion.setConnect();
 			state = connex.createStatement();
 			state.execute(requete);
+			System.out.println(requete);
 			retour = true;
 		}
 		catch(Exception e)
 		{
 			throw e;
 		}
-		finally
+		/*finally
 		{
-			if(state != null)
-			{
-				
-				state.close();
-			}
-			if(connex != null)
-			{
-				connex.close();
-			}
-		}
+			connex.close();
+			state.close();
+		}*/
 		return retour;
 	}
 	
@@ -70,7 +64,7 @@ public class Categorie {
 		Statement state = null;
 		try
 		{
-			connex = new Connexion().setConnect();
+			connex = Connexion.setConnect();
 			state = connex.createStatement();
 			ResultSet rs = state.executeQuery(requete);
 			while(rs.next())
@@ -86,22 +80,14 @@ public class Categorie {
 		{
 			throw e;
 		}
-		finally
+		/*finally
 		{
-			if(state != null)
-			{
-				
-				state.close();
-			}
-			if(connex != null)
-			{
-				connex.close();
-			}
-		}
+			connex.close();
+		}*/
 		return liste;
 	}
-	
-	public Categorie selectById(int idcategorie) throws Exception 
+
+	public Categorie selectById(int idcategorie) throws Exception
 	{
 		Categorie categorie = new Categorie();
 		String requete = "select * from categorie where idcategorie ='"+idcategorie+"'";
@@ -117,7 +103,7 @@ public class Categorie {
 				categorie.setCategorie(rs.getString("categorie"));
 				categorie.setDureeEnchereCategorie(rs.getDouble("dureeencherecategorie"));
 			}
-			
+
 		}
 		catch(Exception e)
 		{
@@ -127,7 +113,7 @@ public class Categorie {
 		{
 			if(state != null)
 			{
-				
+
 				state.close();
 			}
 			if(connex != null)

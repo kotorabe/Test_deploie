@@ -43,7 +43,7 @@ public class V_Enchere_Solde {
 		ArrayList<V_Enchere_Solde> liste = new ArrayList<>();
 		try
 		{	
-			connex = new Connexion().setConnect();
+			connex = Connexion.setConnect();
 			state = connex.createStatement();
 			ResultSet rs = state.executeQuery(requete);
 			while(rs.next())
@@ -51,7 +51,7 @@ public class V_Enchere_Solde {
 				V_Enchere_Solde solde = new V_Enchere_Solde();
 				solde.setIdenchere(rs.getInt("idenchere"));
 				solde.setMontant(rs.getFloat("montant"));
-				V_Enchere_Solde.solde = V_Enchere_Solde.solde + solde.getMontant();
+				this.solde = this.solde + solde.getMontant();
 				solde.setDateheureenchere(rs.getDate("dateheureenchere"));
 				liste.add(solde);
 			}
@@ -61,15 +61,8 @@ public class V_Enchere_Solde {
 		}
 		finally
 		{
-			if(state != null)
-			{
-				
-				state.close();
-			}
-			if(connex != null)
-			{
-				connex.close();
-			}
+			connex.close();
+			state.close();
 		}
 		return liste;
 	}

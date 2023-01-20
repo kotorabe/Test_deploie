@@ -1,8 +1,10 @@
 package com.example.enchere.ModelAdmin.Vue;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.example.enchere.Base.Connexion;
@@ -57,13 +59,13 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 
 	public ArrayList<V_Utilisateur_Rechargement> selectAll() throws Exception
 	{
-		String requete = "select * from v_utilisateur_rechargement";
+		String requete = "select * from v_utilisateur_rechargement2";
 		Connection connex = null;
 		Statement state = null;
 		ArrayList<V_Utilisateur_Rechargement> liste = new ArrayList<>();
 		try
 		{
-			connex = new Connexion().setConnect();
+			connex = Connexion.setConnect();
 			state = connex.createStatement();
 			ResultSet rs = state.executeQuery(requete);
 			while(rs.next())
@@ -76,6 +78,7 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 				get.setSolde_compte(rs.getFloat("solde_compte"));
 				get.setMontantrecharge(rs.getFloat("montantrecharge"));
 				get.setValidation(rs.getInt("validation"));
+				get.setIdrechargement(rs.getInt("idrechargement"));
 				liste.add(get);
 			}
 		}
@@ -85,28 +88,21 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 		}
 		finally
 		{
-			if(state != null)
-			{
-				
-				state.close();
-			}
-			if(connex != null)
-			{
-				connex.close();
-			}
+			connex.close();
+			state.close();
 		}
 		return liste;
 	}
 	
 	public ArrayList<V_Utilisateur_Rechargement> selectById(int id) throws Exception
 	{
-		String requete = "select * from v_utilisateur_rechargement where idutilisateur='"+id+"'";
+		String requete = "select * from v_utilisateur_rechargement2 where idutilisateur='"+id+"'";
 		Connection connex = null;
 		Statement state = null;
-		ArrayList<V_Utilisateur_Rechargement> liste = new ArrayList<V_Utilisateur_Rechargement>();
+		ArrayList<V_Utilisateur_Rechargement> liste = new ArrayList<>();
 		try
 		{
-			connex = new Connexion().setConnect();
+			connex = Connexion.setConnect();
 			state = connex.createStatement();
 			ResultSet rs = state.executeQuery(requete);
 			while(rs.next())
@@ -119,6 +115,7 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 				get.setSolde_compte(rs.getFloat("solde_compte"));
 				get.setMontantrecharge(rs.getFloat("montantrecharge"));
 				get.setValidation(rs.getInt("validation"));
+				get.setIdrechargement(rs.getInt("idrechargement"));
 				liste.add(get);
 			}
 		}
@@ -128,15 +125,8 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 		}
 		finally
 		{
-			if(state != null)
-			{
-				
-				state.close();
-			}
-			if(connex != null)
-			{
-				connex.close();
-			}
+			connex.close();
+			state.close();
 		}
 		return liste;
 	}
@@ -144,13 +134,13 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 	
 	public ArrayList<V_Utilisateur_Rechargement> select_non_valide() throws Exception
 	{
-		String requete = "select * from rechargement_non_valide";
+		String requete = "select * from v_utilisateur_rechargement2 where validation = 0";
 		Connection connex = null;
 		Statement state = null;
 		ArrayList<V_Utilisateur_Rechargement> liste = new ArrayList<>();
 		try
 		{
-			connex = new Connexion().setConnect();
+			connex = Connexion.setConnect();
 			state = connex.createStatement();
 			ResultSet rs = state.executeQuery(requete);
 			while(rs.next())
@@ -163,6 +153,7 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 				get.setSolde_compte(rs.getFloat("solde_compte"));
 				get.setMontantrecharge(rs.getFloat("montantrecharge"));
 				get.setValidation(rs.getInt("validation"));
+				get.setIdrechargement(rs.getInt("idrechargement"));
 				liste.add(get);
 			}
 		}
@@ -170,18 +161,11 @@ public class V_Utilisateur_Rechargement extends Rechargement{
 		{
 			throw e;
 		}
-		finally
+		/*finally
 		{
-			if(state != null)
-			{
-				
-				state.close();
-			}
-			if(connex != null)
-			{
-				connex.close();
-			}
-		}
+			connex.close();
+			state.close();
+		}*/
 		return liste;
 	}
 	

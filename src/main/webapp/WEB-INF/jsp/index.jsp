@@ -35,7 +35,7 @@
                         <div class="brand-logo">
                             <h2>Administrateur</h2>
                             <% if(err != null) {%>
-                            <center><strong class="alert-danger"><%= err %></strong></center>
+                                <center><strong class="alert-danger"><%= err %></strong></center>
                             <% } %>
                         </div>
                         <h4>Bonjour!</h4>

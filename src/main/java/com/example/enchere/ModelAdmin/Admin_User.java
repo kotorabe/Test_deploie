@@ -25,7 +25,7 @@ public class Admin_User {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+	
 	public String getMdp() {
 		return mdp;
 	}
@@ -38,7 +38,7 @@ public class Admin_User {
 	public void setCompte(float compte) {
 		this.compte = compte;
 	}
-
+	
 	public boolean login(Admin_User admin) throws Exception
 	{
 		String requete = "select * from admin where nom='"+admin.getNom()+"' and mdp='"+admin.getMdp()+"'";
@@ -59,12 +59,12 @@ public class Admin_User {
 				utilisateur.setNom(rs.getString("nom"));
 				nbr++;
 			}if(nbr != 0){
-			approved = true;
-		}else if(nbr == 0)
-		{
+				approved = true;
+			}else if(nbr == 0)
+			{
 //				throw new Exception(message);
-			approved = false;
-		}
+				approved = false;
+			}
 		}
 		catch(Exception e)
 		{
@@ -76,6 +76,6 @@ public class Admin_User {
 			state.close();
 		}*/
 		return approved;
-
+		
 	}
 }
