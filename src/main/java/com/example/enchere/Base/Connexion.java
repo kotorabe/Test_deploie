@@ -7,8 +7,8 @@ public class Connexion {
 	private static String url = "jdbc:postgresql://containers-us-west-185.railway.app:5889/railway";
     private static String user="postgres";
     private static String passwd = "NxPX0hpksmxrlYaTnqg5";
-	private  Connection connect;
-	public  Connection setConnect()
+	private static  Connection connect;
+	public static  Connection setConnect()
 	{
 		if (connect == null) {
             try {
