@@ -16,14 +16,15 @@ import java.util.ArrayList;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/Admin")
+@RequestMapping("/")
 public class UserAdminController {
-	//@PostMapping("/LoginAdmin")
-	/*public Admin_User login(@RequestBody Admin_User user) throws Exception
+
+	@RequestMapping("/")
+	public String index() throws Exception
 	{
-		Admin_User login = new Admin_User().login(user);
-		return login;
-	}*/
+		return "index";
+	}
+
 	@PostMapping("/LoginAdmin")
 	public String login(HttpServletRequest request, Admin_User user, Model ModelAdmin) throws Exception
 	{

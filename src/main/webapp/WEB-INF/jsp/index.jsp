@@ -39,7 +39,7 @@
                             <% } %>
                         </div>
                         <h4>Bonjour!</h4>
-                        <form class="pt-3" action="Admin/LoginAdmin" method="post">
+                        <form class="pt-3" action="/LoginAdmin" method="post">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" name="data01" placeholder="Username" required value="Jennifer">
                             </div>
