@@ -62,9 +62,15 @@ public class Utilisateur {
 			connex = new Connexion().setConnect();
 			state = connex.createStatement();
 			ResultSet rs = state.executeQuery(requete);
+			int nbr = 0;
 			while(rs.next())
 			{
 				utilisateur.setIdutiilisateur(rs.getInt("idutilisateur"));
+				nbr++;
+			}
+			if(nbr == 0)
+			{
+				throw new Exception("L'utilisateur n'existe pas");
 			}
 		}
 		catch(Exception e)
@@ -145,7 +151,7 @@ public class Utilisateur {
 		{
 			throw e;
 		}
-		/*finally
+		finally
 		{
 			if(state != null)
 			{
@@ -155,7 +161,7 @@ public class Utilisateur {
 			{
 				connex.close();
 			}
-		}*/
+		}
 		return retour;
 	}
 	

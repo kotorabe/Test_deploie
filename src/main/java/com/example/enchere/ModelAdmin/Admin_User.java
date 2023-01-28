@@ -11,8 +11,6 @@ public class Admin_User {
 	private String nom;
 	private String mdp;
 	private float compte;
-
-
 	public int getIdAdmin() {
 		return idAdmin;
 	}
@@ -39,17 +37,15 @@ public class Admin_User {
 		this.compte = compte;
 	}
 	
-	public boolean login(Admin_User admin) throws Exception
+	public Admin_User login(Admin_User admin) throws Exception
 	{
 		String requete = "select * from admin where nom='"+admin.getNom()+"' and mdp='"+admin.getMdp()+"'";
 		Connection connex = null;
 		Statement state = null;
 		Admin_User utilisateur = new Admin_User();
-		String message = "Utilisateur inéxistante";
-		boolean approved = false;
 		try
 		{
-			connex = Connexion.setConnect();
+			connex = new Connexion().setConnect();
 			state = connex.createStatement();
 			ResultSet rs = state.executeQuery(requete);
 			int nbr = 0;
@@ -58,24 +54,29 @@ public class Admin_User {
 				utilisateur.setIdAdmin(rs.getInt("idadmin"));
 				utilisateur.setNom(rs.getString("nom"));
 				nbr++;
-			}if(nbr != 0){
-				approved = true;
-			}else if(nbr == 0)
+			}
+			if(nbr == 0)
 			{
-//				throw new Exception(message);
-				approved = false;
+				throw new Exception("L'utilisateur n'existe pas");
 			}
 		}
 		catch(Exception e)
 		{
 			throw e;
 		}
-		/*finally
+		finally
 		{
-			connex.close();
-			state.close();
-		}*/
-		return approved;
+			if(state != null)
+			{
+				
+				state.close();
+			}
+			if(connex != null)
+			{
+				connex.close();
+			}
+		}
+		return utilisateur;
 		
 	}
 }

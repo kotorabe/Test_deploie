@@ -75,8 +75,8 @@ public class Enchere {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
-	
-	
+
+
 	public LocalDateTime getDatefinenchere() {
 		return datefinenchere;
 	}
@@ -85,7 +85,7 @@ public class Enchere {
 	}
 	public ArrayList<Enchere> selection(String condition) throws Exception
 	{
-		String requete = "select * from enchere "+condition;
+		String requete = "select * from "+condition;
 		Connection connex = null;
 		Statement state = null;
 		ArrayList<Enchere> liste = new ArrayList<>();
@@ -130,21 +130,21 @@ public class Enchere {
 	}
 	public ArrayList<Enchere> selectById(int id) throws Exception
 	{
-		return selection(" where idenchere='"+id+"'");
+		return selection(" enchere where idenchere='"+id+"'");
 	}
 	public ArrayList<Enchere> select_valide() throws Exception
 	{
-		return selection(" where datefinenchere>now()");
+		return selection(" enchere where datefinenchere>now()");
 	}
 	public ArrayList<Enchere> selectall() throws Exception
 	{
-		return selection("");
+		return selection(" enchere");
 	}
 	public ArrayList<Enchere> selectRecherche(String recherche) throws Exception
 	{
-		return selection(" where description like '%"+recherche+"%'");
+		return selection(" v_enchere_categorie where description like '%"+recherche+"%' or categorie like '%"+recherche+"%'");
 	}
-	
+
 	public boolean insertion(Enchere enchere) throws Exception
 	{
 		LocalDateTime now = java.time.LocalDateTime.now();
